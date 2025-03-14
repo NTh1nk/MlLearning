@@ -1,10 +1,11 @@
 #What if we had 10 features for each data point?
 
-#In this case, we are importing StandardScaler to scale the features, so they are comparable, and not matplotlib, as we cant visualise the data.
+#In this case, we are importing StandardScaler to scale the features, so they are comparable
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
-
+import matplotlib.pyplot as plt
+from sklearn.metrics import r2_score
 # Each data points, has 10 features.
 x = np.array([
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -45,3 +46,19 @@ print("Prediction", prediction[0])
 
 print("Coefficents", model.coef_) #model.coef_ is how you get the coeffecints
 print("Intercept", model.intercept_)
+
+
+#Now we can test the accuracy using R^2
+
+r2 = r2_score(y, model.predict(X_scaled))
+
+print("R^2 Score:", r2)
+#Now we want to visualise the data 
+plt.scatter(y, model.predict(X_scaled), color="red", label="Prediction vs Real")
+plt.xlabel("Real values (y)")
+plt.ylabel("Predicted values")
+plt.plot([min(y), max(y)], [min(y), max(y)], color="red", linestyle="dashed", label="Perfect Prediction")
+plt.legend()
+plt.title("Prediction vs Real")
+plt.show()
+
