@@ -39,3 +39,9 @@ new_data_scaled = scaler.transform(new_data)
 prediction = model.predict(new_data_scaled)
 
 print("Prediction", prediction[0])
+
+#The model, is finished, now it is time to take a look into the coeffecients
+
+
+print("Coefficents", model.coef_) #model.coef_ is how you get the coeffecints
+print("Intercept", model.intercept_)
